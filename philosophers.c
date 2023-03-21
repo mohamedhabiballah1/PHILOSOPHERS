@@ -12,51 +12,76 @@
 
 #include "philosophers.h"
 
-void    *routine(void *arg)
+int ft_check_params(char **av)
 {
-    printf("Philosopher %d is in the room\n", i);
+    if (ft_atoi(av[1]) <= 0)
+        return(1);
+    else if (ft_atoi(av[2]) <= 0)
+        return(1);
+    else if (ft_atoi(av[3]) <= 0)
+        return(1);
+    else if (ft_atoi(av[4]) <= 0)
+        return(1);
     return (0);
 }
 
-void    philosophers(t_list *data)
+void    philosophers(t_list *lst)
 {
-    pthread_t t[data->philosophers];
-    pthread_mutex_t chopkits[data->philosophers];
-    
-    data->i = 1;
-    while (data->i <= data->philosophers)
+    t_data *data = ft_data(lst);
+    t_list *tmp;
+    pthread_mutex_t chopkits[lst->philosophers];
+    int i;
+
+    i = 0;
+    tmp = lst;
+    //printf("%d\n", data ->philosophers);
+    while (i <= 2)//tmp->philosophers)
     {
-        if (pthread_mutex_init(&chopkits[data->i], NULL) != 0)
-            write(2, "Error\n", 6);
-        data->i++;
-    }
-    data->i = 1;
-    while (data->i <= data->philosophers)
-    {
-        if (pthread_create(&t[data->i], NULL, routine, &data->i) != 0)
-            write(2, "Error\n", 6);
-        data->i++;
-    }
-    data->i = 1;
-    while (data->i <= data->philosophers)
-    {
-        if (pthread_join(t[data->i], NULL) != 0)
-            write(2, "Error\n", 6);
-        data->i++;
+        puts("hello");
+        pthread_mutex_init(&data->chopkits[i], NULL);
+            //write(1, "Error\n", 6);
+        i++;
     }
 }
 
 int main(int ac, char **av)
 {
-    t_list data;
+    t_list *lst = NULL;
+    t_data *data;
+
+    int i;
+    int j;
+    int k;
+    int m;
 
     if (ac > 4 && ac < 7)
     {
-        data.philosophers = ft_atoi(av[1]);
-        data.die = ft_atoi(av[2]);
-        data.eat = ft_atoi(av[3]);
-        data.sleep = ft_atoi(av[4]);
-        philosophers(&data);
+        if (ft_check_params(av) != 0)
+        {
+            write(1, "Error\n", 6);
+            return (1);
+        }
+        i = 1;
+        j = 1;
+        k = 2;
+        m = 0;
+        while (i <= ft_atoi(av[1]))
+        {
+            if (i == ft_atoi(av[1]))
+                ft_lst_add_back(&lst, ft_lstnew(i, 1, j));
+            else
+                ft_lst_add_back(&lst, ft_lstnew(i, k, j));
+            i++;
+            k++;
+            j++;
+        }
+        lst->philosophers = ft_atoi(av[1]);
+        lst->t_die = ft_atoi(av[2]);
+        lst->t_eat = ft_atoi(av[3]);
+        lst->t_sleep = ft_atoi(av[4]);
+        data = ft_lstnews(ft_atoi(av[1]));
+        ft_lst_add_backs(&lst, data);
+        philosophers(lst);
     }
     return (0);
 }

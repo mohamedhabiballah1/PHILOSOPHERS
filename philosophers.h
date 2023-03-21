@@ -21,27 +21,32 @@
 
 typedef struct s_data
 {
+    pthread_mutex_t *chopkits;
     int philosophers;
-    int eat;
-    int sleep;
-    int die;
+    struct s_data *next;
 }   t_data;
 
 typedef struct s_list
 {
-    int philosophers;
+    pthread_t t_id;
+    int t_eat;
+    int t_die;
+    int t_sleep;
+    int left;
+    int right;
     int philos;
-    int eat;
-    int die;
-    int sleep;
-    int i;
-    pthread_mutex_t *chopkits;
+    int philosophers;
+    int fork;
     struct s_list *next;
+    t_data *next_data;
 }   t_list;
 
 int	ft_atoi(const char *str);
 t_list  *ft_lstnew(int content, int left, int right);
+t_data  *ft_lstnews(int content);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lst_add_back(t_list **lst, t_list *new);
-void    start(t_list **data);
+void	ft_lst_add_backs(t_list **lst, t_data *new);
+t_data	*ft_data(t_list *lst);
+
 #endif

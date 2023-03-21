@@ -12,11 +12,80 @@
 
 #include "philosophers.h"
 
+t_list  *ft_lstnew(int content, int left, int right)
+{
+    t_list  *new;
+    new = malloc(sizeof(t_list));
+    if (new == NULL)
+        return (NULL);
+    new -> philos = content;
+	new -> left = left;
+	new -> right = right;
+	new -> fork = 0;
+    new -> next = NULL;
+    return (new);
+}
+
+t_data  *ft_lstnews(int content)
+{
+    t_data  *new;
+    new = malloc(sizeof(t_data));
+    if (new == NULL)
+        return (NULL);
+    new -> philosophers = content;
+    new -> next = NULL;
+    return (new);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst)
+	{
+		while (lst->next != NULL)
+			lst = lst -> next;
+	}
+	return (lst);
+}
+
+t_data	*ft_data(t_list *lst)
+{
+	if (lst)
+	{
+		while (lst->next != NULL)
+			lst = lst -> next;
+	}
+	return (lst->next_data);
+}
+
+void	ft_lst_add_backs(t_list **lst, t_data *new)
+{
+	t_list *tmp;
+
+	if (*lst)
+	{
+		tmp = ft_lstlast(*lst);
+		tmp -> next_data = new;
+	}
+}
+
+void	ft_lst_add_back(t_list **lst, t_list *new)
+{
+	t_list *tmp;
+
+	if (*lst)
+	{
+		tmp = ft_lstlast(*lst);
+		tmp -> next = new;
+	}
+	else
+		*lst = new;
+}
+
 int	ft_atoi(const char *str)
 {
 	int	i;
 	int	sign;
-	int	ret;
+	int	ret; 
 
 	i = 0;
 	sign = 1;
