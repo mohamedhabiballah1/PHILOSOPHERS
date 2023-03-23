@@ -6,21 +6,25 @@
 /*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:42:44 by mhabib-a          #+#    #+#             */
-/*   Updated: 2023/03/12 12:37:34 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:30:59 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_list  *ft_lstnew(int content, int left, int right)
+t_list  *ft_lstnew(int content, int left, int right, char **av)
 {
     t_list  *new;
     new = malloc(sizeof(t_list));
     if (new == NULL)
         return (NULL);
-    new -> philos = content;
-	new -> left = left;
-	new -> right = right;
+    new->philos = content;
+	new->left = left;
+	new->right = right;
+	new->philosophers = ft_atoi(av[1]);
+    new->t_die = ft_atoi(av[2]);
+    new->t_eat = ft_atoi(av[3]);
+    new->t_sleep = ft_atoi(av[4]);
 	new -> fork = 0;
     new -> next = NULL;
     return (new);
