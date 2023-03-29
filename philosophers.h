@@ -6,7 +6,7 @@
 /*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:35:09 by mhabib-a          #+#    #+#             */
-/*   Updated: 2023/03/22 10:58:26 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:31:09 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_data
 {
     pthread_mutex_t *chopkits;
+    pthread_mutex_t write;
     int philosophers;
     struct timeval beggin;
     struct s_data *next;
@@ -31,7 +32,6 @@ typedef struct s_data
 typedef struct s_list
 {
     pthread_t t_id;
-    pthread_mutex_t write;
     struct timeval current;
     int t_eat;
     int t_die;
@@ -41,6 +41,7 @@ typedef struct s_list
     int philos;
     int philosophers;
     int fork;
+    size_t last_eat;
     struct s_list *next;
     t_data *next_data;
 }   t_list;
