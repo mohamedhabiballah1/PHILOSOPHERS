@@ -6,7 +6,7 @@
 /*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:35:09 by mhabib-a          #+#    #+#             */
-/*   Updated: 2023/03/28 01:31:09 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/04/02 03:48:51 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ typedef struct s_list
 {
     pthread_t t_id;
     struct timeval current;
-    int t_eat;
-    int t_die;
-    int t_sleep;
+    size_t t_eat;
+    size_t t_die;
+    size_t t_sleep;
     int left;
     int right;
     int philos;
     int philosophers;
     int fork;
+    int nb_eat;
+    int eated;
     size_t last_eat;
     struct s_list *next;
     t_data *next_data;

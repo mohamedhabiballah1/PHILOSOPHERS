@@ -6,7 +6,7 @@
 /*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:42:44 by mhabib-a          #+#    #+#             */
-/*   Updated: 2023/03/27 23:46:52 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/04/02 04:18:48 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ t_list  *ft_lstnew(int content, int left, int right, char **av)
         return (NULL);
     new->philos = content;
 	new->left = left;
+	new -> fork = 0;
+	new->last_eat = 0;
+	new ->eated = 0;
 	new->right = right;
 	new->philosophers = ft_atoi(av[1]);
     new->t_die = ft_atoi(av[2]);
     new->t_eat = ft_atoi(av[3]);
     new->t_sleep = ft_atoi(av[4]);
-	new -> fork = 0;
-	new->last_eat = 0;
+	if (av[5])
+		new->nb_eat = ft_atoi(av[5]);
+	else
+	 	new->nb_eat = 0;
     new -> next = NULL;
     return (new);
 }
